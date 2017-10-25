@@ -38,29 +38,35 @@
             .labelling img {
                 border-radius: 10px;
             }
+
         .toplabel {
             position: absolute;
             left: 5%;
             right: 5%;
-            top:5%;
+            top: 5%;
             font-size: 30px;
-            color: #9b5353;
+            color: #ffffff;
+            opacity: 0.9;
         }
+
         .middlelabel {
             position: absolute;
             left: 5%;
             right: 5%;
             bottom: 40%;
-            font-size: 60px;
-            color: #9b5353;
+            font-size: 80px;
+            color: #ffffff;
+            opacity: 0.7;
         }
-         .bottomlabel {
+
+        .bottomlabel {
             position: absolute;
             left: 5%;
             right: 5%;
             bottom: 5%;
-            font-size: 30px;
-            color: #9b5353;
+            font-size: 10px;
+            color: #ffffff;
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -72,7 +78,7 @@
         </div>
         <div class="labelling">
             <label class="toplabel">发达发大</label>
-            <label class="middlelabel">10000</label>
+            <label class="middlelabel"></label>
             <label class="bottomlabel">会就好：8562-65-85 的接口</label>
             <img src="http://gitimage.howew.com/Image/lovers.jpg" />
             <!--<img src="file:///E:\GIT源码\GitImage.io\Image\lovers.jpg" />-->
@@ -80,3 +86,41 @@
     </div>
 </body>
 </html>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var startTime = new Date('2016/05/21 00:00');
+        var endTime = new Date();
+        var s1 = endTime.getTime(), s2 = startTime.getTime();
+        var total = (s1 - s2) / 1000;
+        var day = parseInt(total / (24 * 60 * 60));//计算整数天数
+        //var afterDay = total - day * 24 * 60 * 60;//取得算出天数后剩余的秒数
+        //var hour = parseInt(afterDay / (60 * 60));//计算整数小时数
+        //var afterHour = total - day * 24 * 60 * 60 - hour * 60 * 60;//取得算出小时数后剩余的秒数
+        //var min = parseInt(afterHour / 60);//计算整数分
+        //var afterMin = total - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60;//取得算出分后剩余的秒数
+
+        var today = new Array('星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六');
+        var week = today[startTime.getDay()];
+
+        $(".middlelabel").html(day);
+        $(".toplabel").html("某天已经");
+        $(".bottomlabel").html("起始日：" + startTime.Format("yyyy-MM-dd") + " " + week);
+    });
+
+    Date.prototype.Format = function (fmt) { //author: meizz   
+        var o = {
+            "M+": this.getMonth() + 1, //月份   
+            "d+": this.getDate(), //日   
+            "H+": this.getHours(), //小时   
+            "m+": this.getMinutes(), //分   
+            "s+": this.getSeconds(), //秒   
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度   
+            "S": this.getMilliseconds() //毫秒   
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+</script>
